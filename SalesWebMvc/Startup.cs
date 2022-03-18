@@ -25,10 +25,13 @@ namespace SalesWebMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = "server=localhost;user=developer;password=1234567;database=saleswebmvcappdb";
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 28));
+
             services.AddControllersWithViews();
 
             services.AddDbContext<SalesWebMvcContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SalesWebMvcContext")));
+                    options.UseMySql(connectionString, serverVersion));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
